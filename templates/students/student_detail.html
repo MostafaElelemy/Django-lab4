@@ -1,0 +1,9 @@
+{% extends 'base.html' %} {% block content %}
+<h2>{{ student.name }}</h2>
+{% if student.image %}<img class="thumb" src="{{ student.image.url }}" />{%
+endif %}
+<p>Age: {{ student.age }}</p>
+<p>Birth date: {{ student.date_of_birth }}</p>
+<p>Courses: {{ student.courses.all|join:", " }}</p>
+<a href="{% url 'students:update' student.pk %}">Edit</a>
+{% endblock %}

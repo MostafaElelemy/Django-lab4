@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %}Courses{% endblock %} {% block
+content %}
+<h2>Courses</h2>
+<a href="{% url 'courses:create' %}">+ New</a>
+<ul>
+  {% for c in items %}
+  <li>
+    {{ c.code }} — {{ c.name }} [<a href="{% url 'courses:update' c.pk %}"
+      >edit</a
+    >] [<a href="{% url 'courses:delete' c.pk %}">delete</a>]
+  </li>
+  {% empty %}
+  <li>No courses yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

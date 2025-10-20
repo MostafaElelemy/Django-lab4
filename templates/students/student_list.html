@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block title %}Students{% endblock %} {% block
+content %}
+<h2>Students</h2>
+<a href="{% url 'students:create' %}">+ New</a>
+<table border="1" cellpadding="6">
+  <tr>
+    <th>Photo</th>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Courses</th>
+    <th>Actions</th>
+  </tr>
+  {% for s in items %}
+  <tr>
+    <td>
+      {% if s.image %}<img class="thumb" src="{{ s.image.url }}" />{% endif %}
+    </td>
+    <td><a href="{% url 'students:detail' s.pk %}">{{ s.name }}</a></td>
+    <td>{{ s.age }}</td>
+    <td>
+      {% for c in s.courses.all %} {{ c.code }} - {{ c.name }}{% if not
+      forloop.last %}, {% endif %} {% empty %} — {% endfor %}
+    </td>
+
+    <td>
+      <a href="{% url 'students:update' s.pk %}">edit</a> |
+      <a href="{% url 'students:delete' s.pk %}">delete</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="5">No students yet.</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}
